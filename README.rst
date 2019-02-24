@@ -1,6 +1,6 @@
 Update
 ======
-在原作者的基础上，更改了wubi.py文件。
+在原作者的基础上，修改了wubi.py文件。
 增加了对数字的处理
 
 
@@ -15,13 +15,6 @@ For example if you want to use character-level neural network model in chinese c
 
 比如说,如果你想使用一个字符级神经网络模型处理中文,你会发现最好先将这些汉语翻译成五笔字符。
 
-
-重要提示
-------
-
-喜欢就star一下
-
-if you like it , please star
 
 Install
 -------
