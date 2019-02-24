@@ -36,19 +36,26 @@ def _wubi_generator(chars):
     Chars must be unicode list.
     """
     s = []
+    flag = ''
     for char in chars:
         # handle english in chinese
         var =['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+        digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         if char ==' ':
-            pass
-        elif char in var :
-                s.append(char)
-                if char==chars[-1]:
-                    yield ''.join(s)
+            if len(s)!=0:
+                yield ''.join(s)
+                s=[]
+                flag = ''
+        elif char in var or char in digit or flag in digit and char == ',':
+            flag = char
+            s.append(char)
+            if char==chars[-1]:
+                yield ''.join(s)
         else:
             if len(s)!=0:
                 yield ''.join(s)
                 s=[]
+                flag = ''
             wubi = data['cw'].get(char)
             if wubi == None:
                 wubi=char
@@ -78,3 +85,8 @@ def get(s,type='',delimiter=' '):
         return ''.join(_chinese_generator(u(s),delimiter))
     else:
         return None
+
+if __name__ =='__main__':
+    s = "我12岁了， 我有一个apple。 No.1是谁？这儿有3,000元。"
+    t = get(s, 'cw')
+    print(t)
