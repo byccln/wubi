@@ -37,7 +37,7 @@ def _wubi_generator(chars):
     """
     s = []
     flag = ''
-    for char in chars:
+    for i, char in enumerate(chars):
         # handle english in chinese
         var =['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
         digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -46,10 +46,10 @@ def _wubi_generator(chars):
                 yield ''.join(s)
                 s=[]
                 flag = ''
-        elif char in var or char in digit or flag in digit and char == ',':
+        elif char in var or char in digit or (flag in digit and (char == ',' or char == '.')):
             flag = char
             s.append(char)
-            if char==chars[-1]:
+            if i == len(chars) - 1:
                 yield ''.join(s)
         else:
             if len(s)!=0:
